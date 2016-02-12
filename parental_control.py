@@ -4,11 +4,19 @@ import sublime, sublime_plugin
 import re
 
 
-class AddParenthesesCommand(sublime_plugin.TextCommand):
+class AddBracketCommand(sublime_plugin.TextCommand):
     """Adds parentheses around the cursor for a given word"""
 
-    def run(self, edit):
+    def run(self, edit, bracket):
         view = self.view
+        if bracket == "(":
+            close_bracket = ")"
+        elif bracket == "{":
+            close_bracket = "}"
+        elif bracket == "[":
+            close_bracket = "]"
+        else:
+            return
 
         for selection in view.sel():
             opening_position = None
@@ -33,11 +41,11 @@ class AddParenthesesCommand(sublime_plugin.TextCommand):
 
             # Put the parentheses around the selection:
             if opening_position and closing_position:
-                view.insert(edit, opening_position, "(")
-                view.insert(edit, closing_position, ")")
+                view.insert(edit, opening_position, bracket)
+                view.insert(edit, closing_position, close_bracket)
 
 
-class RemoveParenthesesCommand(sublime_plugin.TextCommand):
+class RemoveBracketCommand(sublime_plugin.TextCommand):
     """Removes parentheses around the cursor in a given line"""
 
     def run(self, edit):
@@ -85,36 +93,36 @@ class RemoveParenthesesCommand(sublime_plugin.TextCommand):
                         break
 
           # Exit if no opening character is found:
-          if opening_character is None:
-              break
+            if opening_character is None:
+                break
 
-          # Reinstantiate seeking position:
-          seeking_position = selection.begin()
-          bracket_counter = 0
+            # Reinstantiate seeking position:
+            seeking_position = selection.begin()
+            bracket_counter = 0
 
-          # Move right
-          while seeking_position < view.size():
-              character = view.substr(seeking_position)
+            # Move right
+            while seeking_position < view.size():
+                character = view.substr(seeking_position)
 
-              # For each opening bracket encountered, increment the bracket counter:
-              if character is opening_character:
-                  bracket_counter += 1
+                # For each opening bracket encountered, increment the bracket counter:
+                if character is opening_character:
+                    bracket_counter += 1
 
-              # For each closing bracket encountered, increment the bracket counter:
-              elif character is closing_character:
-                  bracket_counter -= 1
+                # For each closing bracket encountered, increment the bracket counter:
+                elif character is closing_character:
+                    bracket_counter -= 1
 
-                  # When the matching closing bracket is found:
-                  if bracket_counter < 0:
-                      closing_position = seeking_position
-                      break
+                    # When the matching closing bracket is found:
+                    if bracket_counter < 0:
+                        closing_position = seeking_position
+                        break
 
-              seeking_position += 1
+                seeking_position += 1
 
-          # Prepend to array of parentheses pairs that contain open/close tuples:
-          if (opening_position >= 0) and (closing_position <= view.size()):
-              # Add pairs in reverse order to maintain correct replacement positions:
-              parentheses_pairs.insert(0, (opening_position, closing_position))
+            # Prepend to array of parentheses pairs that contain open/close tuples:
+            if (opening_position >= 0) and (closing_position <= view.size()):
+                # Add pairs in reverse order to maintain correct replacement positions:
+                parentheses_pairs.insert(0, (opening_position, closing_position))
 
         # Dedupe the parentheses pairs:
         parentheses_pairs = list(OrderedDict.fromkeys(parentheses_pairs))
