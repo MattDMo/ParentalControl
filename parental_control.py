@@ -54,7 +54,7 @@ class RemoveBracketCommand(sublime_plugin.TextCommand):
         # Initialize custom settings:
         pc_settings = sublime.load_settings("Parental Control.sublime-settings")
         syntax = view.settings().get("syntax")
-        language = basename(syntax).replace(".tmLanguage", "").lower()
+        language = ".".join(basename(syntax).split(".")[:-1]).lower()
         replace_with = pc_settings.get(language, pc_settings.get("default"))
         parentheses_match = pc_settings.get("parentheses_match")
 
