@@ -1,9 +1,8 @@
 [
-      {"keys": ["super+ctrl+shift+9"], "command": "add_bracket", "args": {"bracket": "("}},
-      {"keys": ["super+ctrl+shift+0"], "command": "remove_bracket"},
-      {"keys": ["super+ctrl+shift+["], "command": "add_bracket", "args": {"bracket": "{"}},
-      {"keys": ["super+ctrl+shift+]"], "command": "remove_bracket"},
-      {"keys": ["super+alt+ctrl+["], "command": "add_bracket", "args": {"bracket": "["}},
-      {"keys": ["super+alt+ctrl+]"], "command": "remove_bracket"},
-      {"keys": ["super+shift+0"], "command": "remove_bracket"}
+    {"keys": ["ctrl+alt+shift+9"], "command": "add_bracket", "args": {"bracket": "("}},
+    {"keys": ["ctrl+alt+shift+0"], "command": "remove_bracket"},
+    {"keys": ["ctrl+alt+shift+["], "command": "add_bracket", "args": {"bracket": "{"}},
+    {"keys": ["ctrl+alt+shift+]"], "command": "remove_bracket"},
+    {"keys": ["ctrl+alt+["], "command": "add_bracket", "args": {"bracket": "["}},
+    {"keys": ["ctrl+alt+]"], "command": "remove_bracket"}
 ]

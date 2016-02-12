@@ -1,4 +1,8 @@
 [
-  {"keys": ["ctrl+shift+9"], "command": "add_parentheses"},
-  {"keys": ["ctrl+shift+0"], "command": "remove_parentheses"}
+    {"keys": ["ctrl+alt+shift+9"], "command": "add_bracket", "args": {"bracket": "("}},
+    {"keys": ["ctrl+alt+shift+0"], "command": "remove_bracket"},
+    {"keys": ["ctrl+alt+shift+["], "command": "add_bracket", "args": {"bracket": "{"}},
+    {"keys": ["ctrl+alt+shift+]"], "command": "remove_bracket"},
+    {"keys": ["ctrl+alt+["], "command": "add_bracket", "args": {"bracket": "["}},
+    {"keys": ["ctrl+alt+]"], "command": "remove_bracket"}
 ]
